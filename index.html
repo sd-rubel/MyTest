@@ -1,24 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUI Buttons App</title>
 
-  <title>HTML</title>
-  
-  <!-- HTML -->
-  
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="align.css">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.development.js"></script>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+
+    <style>
+        body { margin: 0; background-color: #f0f2f5; font-family: 'Roboto', sans-serif; }
+    </style>
 </head>
-
 <body>
-  <p>Nothing to see here...</p>
-  <img src="images/profile.jpg">
-  <!-- Project -->
-  <script src="main.js"></script>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { 
+            Container, Typography, Box, Button, Stack, 
+            Paper, Divider, createTheme, ThemeProvider 
+        } = MaterialUI;
+
+        // কালার থিম সেট করা
+        const theme = createTheme({
+            palette: {
+                primary: { main: '#1976d2' },
+                secondary: { main: '#9c27b0' },
+            },
+        });
+
+        function App() {
+            const [count, setCount] = React.useState(0);
+
+            return (
+                <ThemeProvider theme={theme}>
+                    <Container maxWidth="sm" sx={{ mt: 5 }}>
+                        <Paper elevation={4} sx={{ p: 4, borderRadius: 4, textAlign: 'center' }}>
+                            <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+                                MUI বাটন গ্যালারি
+                            </Typography>
+                            
+                            <Divider sx={{ my: 3 }} />
+
+                            {/* ১. ভেরিয়েন্ট বাটন */}
+                            <Typography variant="subtitle2" sx={{ mb: 2, color: 'gray' }}>স্টাইল ভেরিয়েন্ট:</Typography>
+                            <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+                                <Button variant="contained" color="primary">Contained</Button>
+                                <Button variant="outlined" color="primary">Outlined</Button>
+                                <Button variant="text" color="primary">Text</Button>
+                            </Stack>
+
+                            {/* ২. কালারফুল বাটন */}
+                            <Typography variant="subtitle2" sx={{ mb: 2, color: 'gray' }}>বিভিন্ন রঙ:</Typography>
+                            <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+                                <Button variant="contained" color="success">Success</Button>
+                                <Button variant="contained" color="error">Error</Button>
+                                <Button variant="contained" color="warning">Warning</Button>
+                            </Stack>
+
+                            {/* ৩. আইকনসহ ইমোজি বাটন */}
+                            <Typography variant="subtitle2" sx={{ mb: 2, color: 'gray' }}>আইকন বাটন:</Typography>
+                            <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+                                <Button variant="contained" startIcon="🚀">Send</Button>
+                                <Button variant="outlined" endIcon="🗑️" color="error">Delete</Button>
+                            </Stack>
+
+                            <Divider sx={{ my: 3 }} />
+
+                            {/* ইন্টারঅ্যাকশন বাটন */}
+                            <Box sx={{ p: 2, bgcolor: '#e3f2fd', borderRadius: 2 }}>
+                                <Typography variant="h6">ক্লিক সংখ্যা: {count}</Typography>
+                                <Button 
+                                    variant="contained" 
+                                    fullWidth 
+                                    sx={{ mt: 2 }} 
+                                    onClick={() => setCount(count + 1)}
+                                >
+                                    বাটন ক্লিক করুন
+                                </Button>
+                            </Box>
+                        </Paper>
+                    </Container>
+                </ThemeProvider>
+            );
+        }
+
+        // অ্যাপটি রেন্ডার করা
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
